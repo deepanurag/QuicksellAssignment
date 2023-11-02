@@ -19,3 +19,18 @@
 .exclamation{
     color:rgb(255, 94, 0);
 }
+.leftView{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leftView > *:not(:last-child) {
+    margin-right: 10px;
+}
+
+.progress{
+    color:rgb(255, 189, 21);
+}
+.log{
+     color:red;
+}

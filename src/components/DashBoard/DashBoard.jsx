@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BsExclamationSquareFill, BsThreeDots } from 'react-icons/bs';
+import { BsExclamationSquareFill, BsThreeDots ,BsCircle} from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiSignal3, BiSignal2, BiSignal1 } from "react-icons/bi";
+import {CgDarkMode} from "react-icons/cg"
+import {MdCancelPresentation} from "react-icons/md"
 import "./DashBoard.css";
 import Card1 from "../Card/Card1";
 import Card from "../Card/Card";
@@ -20,7 +22,11 @@ const DashBoard = () => {
                 (elem[index]?.title === "Urgent" && <BsExclamationSquareFill className="exclamation" />) ||
                 (elem[index]?.title === "High" && <BiSignal3 className="high" />) ||
                 (elem[index]?.title === "Medium" && <BiSignal2 className="medium" />) ||
-                (elem[index]?.title === "Low" && <BiSignal1 className="medium" />) || <BsThreeDots />
+                (elem[index]?.title === "Low" && <BiSignal1 className="medium" />) ||
+                (elem[index]?.title === "Todo" && <BsCircle />) ||
+                (elem[index]?.title === "In progress" && <CgDarkMode className="progress" />) ||
+                (elem[index]?.title === "Backlog" && <MdCancelPresentation className="log" />) ||
+                <BsThreeDots />
               ) : (
                 <div className="imageContainer relative" style={{ width: "15px", height: "15px", display: 'inline-block' }}>
                   <img
@@ -38,6 +44,7 @@ const DashBoard = () => {
               <AiOutlinePlus /> <BsThreeDots />
             </div>
           </div>
+          {console.log(elem[index].title)}
           <div className="dashList flex-gap-10">
             {elem[index]?.value?.map((item, ind) =>
               !user ? <Card key={ind} id={item.id} title={item.title} tag={item.tag} /> : <Card1 key={ind} id={item.id} title={item.title} tag={item.tag} />
