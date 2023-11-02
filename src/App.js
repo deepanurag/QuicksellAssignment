@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './App.css';
-import TopNav from './components/TopNav/TopNav';
+import Navbar from './components/Navbar/Navbar';
 // import Card from './components/Card/Card';
 import DashView from './components/DashBoard/DashView';
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +17,7 @@ const App = () => {
 
   return allTickets ? (
     <div>
-      <TopNav />
+      <Navbar />
       <DashView />
     </div>
   ) : <Loading />

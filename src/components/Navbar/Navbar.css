@@ -1,0 +1,57 @@
+/* Navbar Container and Display Button */
+.top-header, .button-style {
+    background-color: #fff;
+}
+
+.top-header {
+    padding: 15px 25px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.button-style {
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Dropdown Content and Select Group */
+.drop-on-click, .select-group {
+    padding: 3px;
+}
+
+.drop-on-click {
+    position: absolute;
+    width: 300px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    margin-top: 10px;
+    z-index: 2;
+    padding: 15px 20px;
+    color: #616161;
+}
+
+.select-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Select Element and Dropdown Icon */
+select {
+    width: 100px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    background: #fff;
+    padding: 2px 5px;
+    color: #292929;
+}
+
+.dropDownIcon {
+    color: gray;
+}
