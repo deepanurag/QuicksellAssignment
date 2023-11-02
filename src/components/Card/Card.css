@@ -1,4 +1,4 @@
-.cardContainer{
+.cardContainer {
     width: 100%;
     border: 1px solid rgb(234, 234, 234);
     border-radius: 4px;
@@ -7,32 +7,58 @@
     background: white;
 }
 
-.cardContainer > *{
+.cardContainer > * {
     width: 100%;
 }
 
-.showStatus{
+.showStatus {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 4px;
     width: 10px;
     height: 10px;
-    background: rgb(227, 227, 227);
+    background: rgb(22, 255, 57);
     border-radius: 50%;
 }
 
-.cardTags{
+.cardTags {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.tags{
+.tags {
     width: max-content;
     padding: 2px 8px;
     border-radius: 5px;
     border: 1px solid silver;
 }
-.circle{
-    color:rgb(179, 178, 178);
+
+.circle {
+    color: rgb(179, 178, 178);
 }
+
+.cardHeading {
+    display: flex;
+    align-items: center;
+}
+
+.color-grey {
+    color: grey;
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.userImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.cardTitle {
+    font-weight: 200;
+    margin-top: 10px; /* Added some space between title and tags for readability */
+}
+

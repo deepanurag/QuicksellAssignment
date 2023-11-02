@@ -21,55 +21,31 @@ export const selectData = (group, allTickets, orderValue) => async (dispatch) =>
 
         if (group === 'status') {
             const statusSet = new Set(allTickets.map(elem => elem.status));
-
             const arr = Array.from(statusSet);
 
             arr.forEach((elem, index) => {
-                const arrFiltered = allTickets.filter(fElem => elem === fElem.status);
-                selectedData.push({
-                    [index]: {
-                        title: elem,
-                        value: arrFiltered
-                    }
-                });
+                const value = allTickets.filter(fElem => elem === fElem.status);
+                selectedData.push({ [index]: { title: elem, value } });
             });
         } else if (group === 'user') {
             user = true;
 
             allTickets.allUser.forEach((elem, index) => {
-                const arrFiltered = allTickets.allTickets.filter(fElem => elem.id === fElem.userId);
-                selectedData.push({
-                    [index]: {
-                        title: elem.name,
-                        value: arrFiltered
-                    }
-                });
+                const value = allTickets.allTickets.filter(fElem => elem.id === fElem.userId);
+                selectedData.push({ [index]: { title: elem.name, value } });
             });
         } else {
             const priorityList = ["No priority", "Low", "Medium", "High", "Urgent"];
 
             priorityList.forEach((elem, index) => {
-                const arrFiltered = allTickets.filter(fElem => index === fElem.priority);
-                selectedData.push({
-                    [index]: {
-                        title: elem,
-                        value: arrFiltered
-                    }
-                });
+                const value = allTickets.filter(fElem => index === fElem.priority);
+                selectedData.push({ [index]: { title: elem, value } });
             });
         }
 
-        if (orderValue === "title") {
-            selectedData.forEach(elem => {
-                elem[Object.keys(elem)].value.sort((a, b) => a.title.localeCompare(b.title));
-            });
-        }
+        const sortFunction = (a, b) => orderValue === "title" ? a.title.localeCompare(b.title) : b.priority - a.priority;
 
-        if (orderValue === "priority") {
-            selectedData.forEach(elem => {
-                elem[Object.keys(elem)].value.sort((a, b) => b.priority - a.priority);
-            });
-        }
+        selectedData.forEach(elem => elem[Object.keys(elem)].value.sort(sortFunction));
 
         dispatch({ type: 'SELECT_DATA_SUCCESS', payload: { selectedData, user } });
     } catch (error) {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 // import Card from './components/Card/Card';
-import DashView from './components/DashBoard/DashView';
+import DashBoard from './components/DashBoard/DashBoard';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllData } from './Actions/DataAction';
 import Loading from './components/Loading/Loading';
@@ -18,7 +18,7 @@ const App = () => {
   return allTickets ? (
     <div>
       <Navbar />
-      <DashView />
+      <DashBoard />
     </div>
   ) : <Loading />
 }

@@ -3,8 +3,9 @@ import { DataReducer, SelectDataReducer } from './Reducers/DataReducer';
 
 const store = configureStore({
     reducer: {
-        DataReducer, SelectDataReducer
+        DataReducer,
+        SelectDataReducer
     }
-})
+});
 
 export default store;

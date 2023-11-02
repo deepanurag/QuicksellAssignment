@@ -1,35 +1,47 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-export const DataReducer = createReducer({}, {
+const initialDataState = { loading: false, allTickets: [], allUser: [] };
+const initialSelectDataState = { loading: false, selectedData: [], user: null, message: null };
+
+export const DataReducer = createReducer(initialDataState, {
     DATA_REQUEST: (state) => {
         state.loading = true;
     },
     DATA_SUCCESS: (state, action) => {
-        state.loading = false;
-        state.allTickets = action.payload.tickets;
-        state.allUser = action.payload.users;
+        return {
+            loading: false,
+            allTickets: action.payload.tickets,
+            allUser: action.payload.users
+        };
     },
     DATA_FAILURE: (state) => {
-        state.loading = false;
-        state.allTickets = []
-        state.allUser = [];
+        return {
+            loading: false,
+            allTickets: [],
+            allUser: []
+        };
     },
 });
 
-
-export const SelectDataReducer = createReducer({}, {
+export const SelectDataReducer = createReducer(initialSelectDataState, {
     SELECT_DATA_REQUEST: (state) => {
         state.loading = true;
         state.selectedData = [];
     },
     SELECT_DATA_SUCCESS: (state, action) => {
-        state.loading = false;
-        state.selectedData = action.payload.selectedData;
-        state.user = action.payload.user
+        return {
+            loading: false,
+            selectedData: action.payload.selectedData,
+            user: action.payload.user,
+            message: null
+        };
     },
     SELECT_DATA_FAILURE: (state, action) => {
-        state.loading = false;
-        state.selectedData = []
-        state.message = action.payload.message
+        return {
+            loading: false,
+            selectedData: [],
+            user: null,
+            message: action.payload.message
+        };
     },
 });
