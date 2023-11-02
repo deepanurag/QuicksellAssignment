@@ -16,7 +16,6 @@ const App = () => {
   }, [dispatch])
 
   return allTickets ? (
-    // <div style={{ paddingTop: "10px" }} >
     <div>
       <TopNav />
       <DashView />

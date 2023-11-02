@@ -2,89 +2,77 @@ import axios from 'axios';
 
 export const fetchAllData = () => async (dispatch) => {
     try {
-        dispatch({ type: 'DATA_REQUEST' })
+        dispatch({ type: 'DATA_REQUEST' });
 
         const { data } = await axios.get("https://api.quicksell.co/v1/internal/frontend-assignment/");
 
         dispatch({ type: 'DATA_SUCCESS', payload: data });
-
     } catch (error) {
-        dispatch({ type: 'DATA_FAILURE' })
+        dispatch({ type: 'DATA_FAILURE' });
     }
-}
+};
 
 export const selectData = (group, allTickets, orderValue) => async (dispatch) => {
     try {
-        dispatch({ type: 'SELECT_DATA_REQUEST' })
+        dispatch({ type: 'SELECT_DATA_REQUEST' });
 
         let user = false;
-        let mySet = new Set();
-        let arr = [], selectedData = [];
+        let selectedData = [];
 
         if (group === 'status') {
-            allTickets.forEach((elem) => {
-                mySet.add(elem.status);
-            })
+            const statusSet = new Set(allTickets.map(elem => elem.status));
 
-            arr = [...mySet];
+            const arr = Array.from(statusSet);
 
             arr.forEach((elem, index) => {
-                let arr = allTickets.filter((fElem) => {
-                    return elem === fElem.status;
-                })
+                const arrFiltered = allTickets.filter(fElem => elem === fElem.status);
                 selectedData.push({
                     [index]: {
                         title: elem,
-                        value: arr
+                        value: arrFiltered
                     }
-                })
-            })
+                });
+            });
         } else if (group === 'user') {
             user = true;
-            allTickets?.allUser?.forEach((elem, index) => {
-                arr = allTickets?.allTickets?.filter((Felem) => {
-                    return elem.id === Felem.userId;
-                })
 
+            allTickets.allUser.forEach((elem, index) => {
+                const arrFiltered = allTickets.allTickets.filter(fElem => elem.id === fElem.userId);
                 selectedData.push({
                     [index]: {
                         title: elem.name,
-                        value: arr
+                        value: arrFiltered
                     }
-                })
-            })
+                });
+            });
         } else {
-            let prior_list = ["No priority", "Low", "Medium", "High", "Urgent"];
+            const priorityList = ["No priority", "Low", "Medium", "High", "Urgent"];
 
-            prior_list.forEach((elem, index) => {
-                arr = allTickets.filter((fElem) => {
-                    return index === fElem.priority;
-                })
-
+            priorityList.forEach((elem, index) => {
+                const arrFiltered = allTickets.filter(fElem => index === fElem.priority);
                 selectedData.push({
                     [index]: {
                         title: elem,
-                        value: arr
+                        value: arrFiltered
                     }
-                })
-            })
+                });
+            });
         }
 
         if (orderValue === "title") {
-            selectedData.forEach((elem, index) => {
-                elem[index]?.value?.sort((a, b) => a.title.localeCompare(b.title))
-            })
+            selectedData.forEach(elem => {
+                elem[Object.keys(elem)].value.sort((a, b) => a.title.localeCompare(b.title));
+            });
         }
 
         if (orderValue === "priority") {
-            selectedData.forEach((elem, index) => {
-                elem[index]?.value?.sort((a, b) => b.priority - a.priority)
-            })
+            selectedData.forEach(elem => {
+                elem[Object.keys(elem)].value.sort((a, b) => b.priority - a.priority);
+            });
         }
 
         dispatch({ type: 'SELECT_DATA_SUCCESS', payload: { selectedData, user } });
-
     } catch (error) {
-        dispatch({ type: 'SELECT_DATA_FAILURE', payload: error.message })
+        dispatch({ type: 'SELECT_DATA_FAILURE', payload: error.message });
     }
-}
+};
